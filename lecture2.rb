@@ -1,5 +1,5 @@
-#trying to do a calculator
-#use binding.pry to debug
+#
+#
 #
 
 def say(msg)
