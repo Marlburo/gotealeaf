@@ -1,4 +1,0 @@
-gotealeaf
-=========
-
-exercises
