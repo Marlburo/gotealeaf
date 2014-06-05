@@ -1,4 +1,5 @@
 #variable scope
+#tab size
 item1 = [1, 2, 'HELLO', 4]
 string = gets.chomp
 
