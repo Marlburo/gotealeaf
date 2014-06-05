@@ -1,8 +1,4 @@
 #upload to master branch
-#
-#
-#
-
 def say(msg)
   puts "=> #{msg}"
 end
