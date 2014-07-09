@@ -21,9 +21,9 @@ end
 def welcome_msg
 	system 'clear'
 	puts 'Welcome to the best black jack game available, Please enter your name'
-	player_name = gets.chomp
+	$player_name = gets.chomp
 
-	puts 'hello ' + player_name +' hope you have fun losing your money >:)'
+	puts 'hello ' + $player_name +' hope you have fun losing your money >:)'
 	sleep (2)
 	system 'clear'
 	$player_money = 500 #player starting money
@@ -82,7 +82,7 @@ def check_winner(info)
 		check_dealer_won(1)
 		show_me_d_money
 	else
-		quit_game
+		#quit_game
 	end
 end
 
@@ -100,14 +100,17 @@ def check_dealer_won(number)
 	elsif $dealer_card_value == 21
 		puts "the house wins"
 	else
+		puts $player_name + "wins"
 	end
 end
 
-def compare_results
-	if ($dealer_card_value == 21) || (($dealer_card_value > $player_card_value) && ($dealer_card_value <= 21)
-
-
-end
+#def compare_results
+#	if ($dealer_card_value == 21) || (($dealer_card_value > $player_card_value) && ($dealer_card_value <= 21)
+#
+#	else
+#	end
+#
+#end
 
 
 number_of_decks = 4 #we will use only four decks
@@ -155,12 +158,12 @@ while $play == 1
 	#puts $dealer_cards
 	puts "                                        dealer's total =  ***** "#{$dealer_card_value}"
 
-	puts "press 1 to get another card, 2 to end the current hand and any other key to exit"
+	puts "1 hit me, 2 stay"
 	hitme = gets.chomp.to_i
 	check_winner(hitme)
 
 	puts 'And the total is...'
 	puts "player's total = #{$player_card_value}"
 	puts "                                        dealer's total = #{$dealer_card_value}"
-	compare_results
+	#compare_results
 end
