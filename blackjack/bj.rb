@@ -95,30 +95,30 @@ def deal_some_more(number)
 end
 
 def check_dealer_won(number)
-    if $dealer_card_value < 16 && $player_card_value > $dealer_card_value
-      deal_card_d(number)
-      while $dealer_card_value < 16 && $player_card_value > $dealer_card_value
-        deal_card_d(1)
-      end
-    else
-      if ($player_card_value <= 21 && $player_card_value > $dealer_card_value) || $dealer_card_value > 21
-        if $mk_sure == 1
-          puts $player_name + "wins"
-        else
-        end
-
-      elsif $player_card_value == $dealer_card_value
-        if $mk_sure == 1
-          puts "Its a draw"
-        else
-        end    
+  if $dealer_card_value < 16 && $player_card_value > $dealer_card_value
+    deal_card_d(number)
+    while $dealer_card_value < 16 && $player_card_value > $dealer_card_value
+      deal_card_d(1)
+    end
+  else
+    if ($player_card_value <= 21 && $player_card_value > $dealer_card_value) || ($dealer_card_value > 21 && $player_card_value <= 21)
+      if $mk_sure == 1
+        puts $player_name + "wins"
       else
-        if $mk_sure == 1
-          puts 'the house wins'
-        else
-        end
+      end
+
+    elsif $player_card_value == $dealer_card_value
+      if $mk_sure == 1
+        puts "Its a draw"
+      else
+      end    
+    else
+      if $mk_sure == 1
+        puts 'the house wins'
+      else
       end
     end
+  end
 end
 
 number_of_decks = 4 #we will use only four decks
