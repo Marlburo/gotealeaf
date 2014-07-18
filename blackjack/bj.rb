@@ -22,13 +22,12 @@ def welcome_msg
   system 'clear'
   puts 'Welcome to black jack, Please enter your name'
   $player_name = gets.chomp
-
-  puts 'hello ' + $player_name +' hope you have fun losing your money >:)'
-  sleep (2)
+  #puts 'hello ' + $player_name +' hope you have fun losing your money >:)'
+  #sleep (2)
   system 'clear'
   $player_money = 500 #player starting money
-  puts  'you start the game with 500 tokens... how much would you like to bet'
-  $player_bet = gets.chomp
+  #puts  'you start the game with 500 tokens... how much would you like to bet'
+  #$player_bet = gets.chomp
   puts 'shuffling'
   sleep (2)
   system 'clear'
@@ -96,42 +95,31 @@ def deal_some_more(number)
 end
 
 def check_dealer_won(number)
-    if $dealer_card_value < 16
+    if $dealer_card_value < 16 && $player_card_value > $dealer_card_value
       deal_card_d(number)
-
-      #if $dealer_card_value == 21
-       # puts 'The house wins'
-      #elsif $dealer_card_value > 21
-      #  puts $player_name + "wins"
-      #elsif $player_card_value > 21
-      #  puts "The house wins"
-      #elsif $player_card_value == $dealer_card_value
-      #  puts "Its a draw"
-      #elsif $player_card_value > $dealer_card_value
-      #  puts $player_name + "Wins"
-      #else
-      #  puts "The house wins"
-      #end
-
-    #elsif $dealer_card_value == 21
-    #  puts "the house wins"
+      while $dealer_card_value < 16 && $player_card_value > $dealer_card_value
+        deal_card_d(1)
+      end
     else
-      if ($player_card_value < 21 && $player_card_value > $dealer_card_value) || $dealer_card_value > 21
-        puts $player_name + "wins"
+      if ($player_card_value <= 21 && $player_card_value > $dealer_card_value) || $dealer_card_value > 21
+        if $mk_sure == 1
+          puts $player_name + "wins"
+        else
+        end
+
+      elsif $player_card_value == $dealer_card_value
+        if $mk_sure == 1
+          puts "Its a draw"
+        else
+        end    
       else
-        puts 'the house wins'
+        if $mk_sure == 1
+          puts 'the house wins'
+        else
+        end
       end
     end
 end
-
-#def compare_results
-# if ($dealer_card_value == 21) || (($dealer_card_value > $player_card_value) && ($dealer_card_value <= 21)
-#
-# else
-# end
-#
-#end
-
 
 number_of_decks = 4 #we will use only four decks
 $play = 1
@@ -143,6 +131,7 @@ $player_card_value = 0
 $dealer_card_value = 0
 $house_status = 0
 $dealer_won = 0
+$mk_sure = 0
 
 all_cards = deck_size(number_of_decks)#all cards available in the game
 ext_var = all_cards.size
@@ -188,16 +177,18 @@ while $play == 1
     puts '1 hit me, 2 stay'
     hitme = gets.chomp
   end
+  $mk_sure = 1
   check_dealer_won(2)
   sleep(3)
   puts "player's total = #{$player_card_value}"
   puts "                                        dealer's total = #{$dealer_card_value}"
   sleep(6)
   check_dealer_won(2)
-  sleep(3)
-  puts "player's total = #{$player_card_value}"
-  puts "                                        dealer's total = #{$dealer_card_value}"  
+  sleep(6)
+  #puts "player's total = #{$player_card_value}"
+  #puts "                                        dealer's total = #{$dealer_card_value}"  
  
+  $mk_sure = 0  
   $player_card_value = 0
   $dealer_card_value = 0
 end
