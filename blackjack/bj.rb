@@ -37,7 +37,7 @@ def check_cards(card_review)
   if (card_review == 'J' || card_review == 'Q' || card_review == 'K')
     return 10
   elsif card_review == 'A'
-    if $pcv == 1 && $player_card_value > 10
+    if $pcv == 1 && $player_card_value > 10 
       return 1
     elsif $dcv == 1 && $dealer_card_value > 10
       return 1
@@ -94,6 +94,14 @@ def deal_some_more(number)
   deal_card_p(number)
 end
 
+def compare_results
+  if $player_card_value >= 20
+    $exit = 1
+  else
+    $exit = 2
+  end
+end
+
 def check_dealer_won(number)
   if $dealer_card_value < 16 && $player_card_value > $dealer_card_value
     deal_card_d(number)
@@ -132,6 +140,7 @@ $dealer_card_value = 0
 $house_status = 0
 $dealer_won = 0
 $mk_sure = 0
+$exit = 1
 
 all_cards = deck_size(number_of_decks)#all cards available in the game
 ext_var = all_cards.size
@@ -165,17 +174,21 @@ while $play == 1
   #puts $dealer_cards
   puts "                                        dealer's total =  ***** "#{$dealer_card_value}"
 
-  puts "1 hit me, 2 stay"
-  hitme = gets.chomp
-  while hitme == '1'
+  puts "hit me = 1, stay = 2"
+  $hitme = gets.chomp
+  while $hitme == '1'
 
-    check_winner(hitme)
+    check_winner($hitme)
     puts 'And the total is...'
     puts "player's total = #{$player_card_value}"
     puts "                                        dealer's total = #{$dealer_card_value}"
-    #compare_results
-    puts '1 hit me, 2 stay'
-    hitme = gets.chomp
+    compare_results()
+    if $exit == 2
+      puts 'hit me = 1, stay = 2'
+      $hitme = gets.chomp
+    else 
+      $hitme = '2'
+    end
   end
   $mk_sure = 1
   check_dealer_won(2)
@@ -183,8 +196,8 @@ while $play == 1
   puts "player's total = #{$player_card_value}"
   puts "                                        dealer's total = #{$dealer_card_value}"
   sleep(6)
-  check_dealer_won(2)
-  sleep(6)
+  #check_dealer_won(2)
+  #sleep(6)
   #puts "player's total = #{$player_card_value}"
   #puts "                                        dealer's total = #{$dealer_card_value}"  
  
