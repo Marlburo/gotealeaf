@@ -111,7 +111,7 @@ def check_dealer_won(number)
   else
     if ($player_card_value <= 21 && $player_card_value > $dealer_card_value) || ($dealer_card_value > 21 && $player_card_value <= 21)
       if $mk_sure == 1
-        puts $player_name + "wins"
+        puts $player_name + " wins"
       else
       end
 
